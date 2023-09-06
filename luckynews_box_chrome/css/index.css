@@ -66,9 +66,18 @@ ul {
     overflow-y: auto;
 }
 
-#newsList ul li {
+#newsList ul li,
+#favouriteList ul li {
     padding: 10px;
     border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#newsList ul li button,
+#favouriteList ul li button {
+    cursor: pointer;
 }
 
 #settingsList {
@@ -113,7 +122,10 @@ ul {
 
 #searchBtn,
 #exportExcel,
-#resetBtn {
+#resetBtn,
+#searchFavouriteBtn,
+#exportFavouriteExcel,
+#resetFavouriteBtn {
     color: #fff;
     background-color: rgb(30, 144, 255);
     cursor: pointer;
@@ -122,7 +134,11 @@ ul {
 
 #searchBtn:hover,
 #exportExcel:hover,
-#resetBtn:hover {
+#resetBtn:hover,
+#exportFavouriteExcel:hover,
+#resetFavouriteBtn:hover,
+#exportFavouriteExcel:hover
+{
     background-color: rgb(127, 187, 248);
     border: 2px solid rgb(127, 187, 248); 
 }
@@ -132,7 +148,8 @@ ul {
     align-items: center;
 }
 
-#tools {
+#tools,
+#favouritetools {
     padding: 10px;
     display: flex;
     justify-content: space-between;

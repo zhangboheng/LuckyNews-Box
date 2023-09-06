@@ -15,11 +15,12 @@
         <div class="tab">
             <ul>
                 <li class="tablinks" id="news">News</li>
+                <li class="tablinks" id="favourite">Favourite</li>
                 <li class="tablinks" id="settings">Settings</li>
                 <li class="tablinks" id="instructions">Instructions</li>
             </ul>
         </div>
-        <!-- Tools content -->
+        <!-- News Tab Tools content -->
         <div id="tools">
             <div class="inlinecenter">
                 <span id="startText">Start:&nbsp;</span>
@@ -41,8 +42,26 @@
                 <input id="exportExcel" type="button" value="∫Export" title="Export">
             </div>
         </div>
+        <!-- Favourite Tab Tools content -->
+        <div id="favouritetools" style="display:none;">
+            <div class="inlinecenter">
+                <span id="totalFavouriteText">Total:&nbsp;</span>
+                <span id="totalFavouriteNews">0</span>
+            </div>
+            <div class="inlinecenter">
+                <span id="searchFavouriteText">Search Keywords:&nbsp;</span>
+                <input id="nameFavouriteItem" type="text" class="txt">&nbsp;
+                <input id="searchFavouriteBtn" type="button" value="øSearch" title="Search">
+            </div>
+            <div class="inlinecenter">
+                <input id="exportFavouriteExcel" type="button" value="∫Export" title="Export">
+            </div>
+        </div>
         <!-- Tab content -->
         <div id="newsList" class="tabcontent">
+            <ul></ul>
+        </div>
+        <div id="favouriteList" class="tabcontent">
             <ul></ul>
         </div>
         <div id="settingsList" class="tabcontent">

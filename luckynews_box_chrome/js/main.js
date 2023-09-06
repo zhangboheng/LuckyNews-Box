@@ -1,4 +1,5 @@
 // Get LocalStorage Information
+let getLocalStorageFavourite = localStorage.getItem('favouriteNews');
 let getLocalStorageLanguage = localStorage.getItem('language');
 let getLocalStorageTotalLimits = localStorage.getItem('totalLimits');
 let getLocalStorageOrderSettings = localStorage.getItem('orderSettings');
@@ -13,8 +14,9 @@ let getLocalStorageStyleFontColor = localStorage.getItem('styleFontColor');
 let urlsArr = [];
 // Insert All Info To Array
 let newsArr = [];
+let newsFavouriteArr = []; // Export Favourite News List
 let newsInfoBox = [];
-let newsAll = []; // for Export Excel
+let newsAll = []; // Export News List
 let failedUrls = [];
 
 $(document).ready(function () { // Set Default Settings
@@ -50,6 +52,7 @@ function getDefault() { // Get Default Language
             $('#default').prop('checked', true);
         }
     }
+    // Get Default Style Font Size
     if (!getLocalStorageStyleFontSize) {
         localStorage.setItem('styleFontSize', '14');
         getLocalStorageStyleFontSize = localStorage.getItem('styleFontSize');
@@ -57,13 +60,22 @@ function getDefault() { // Get Default Language
         $("#sliderValue").text(getLocalStorageStyleFontSize);
         $("#sliderValue").css('font-size', getLocalStorageStyleFontSize + 'px');
     }
+    // Get Default Style Font Color
     if (!getLocalStorageStyleFontColor) {
         localStorage.setItem('styleFontColor', 'rgb(0, 0, 0)');
     }
+    // Get Dark Mode Button Status
     if (getLocalStorageDarkMode === 'open') {
         $('#darkModeSwitch').prop('checked', true);
         $('html').addClass('dark-mode');
     }
+    // Get Favourite News List
+    if (!getLocalStorageFavourite) {
+        getLocalStorageFavourite = [];
+        newsFavouriteArr = getLocalStorageFavourite;
+        localStorage.setItem('favouriteNews', JSON.stringify(getLocalStorageFavourite));
+    }
+    // Update All Local Storage
     updateAllLocalStorage();
     $('#editTotal').val(getLocalStorageTotalLimits);
     $('#blacklistFilter').val(getLocalStorageBlackList);
@@ -78,14 +90,21 @@ function getDefault() { // Get Default Language
             if (getLocalStorageMemoryNewsList) {
                 $(".switch input").prop('checked', true);
                 let parseNewsList = JSON.parse(getLocalStorageMemoryNewsList);
+                // Filter Default News Items List and Favourite items List
+                if (JSON.parse(getLocalStorageFavourite).length > 0) {
+                    parseNewsList = parseNewsList.filter(function (value, index) {
+                        return JSON.parse(getLocalStorageFavourite).map(x => x.title).indexOf(value.title) === -1;
+                    });
+                }
                 // Export Table use
                 newsAll = parseNewsList;
-                $('#totalNews').text(parseNewsList.length); // Set Total News
+                // Set Total News
+                $('#totalNews').text(parseNewsList.length);
                 for (let i = 0; i < parseNewsList.length; i++) {
-                    $('#newsList ul').append(`<li><span>${i + 1 + '.'
+                    $('#newsList ul').append(`<li><div><span>${i + 1 + '.'
                         }</span><a style="color:${getLocalStorageStyleFontColor}" href="${parseNewsList[i].links
                         }"  target="_blank">${parseNewsList[i].title
-                        }</a></li>`);
+                        }</a></div><div><button class="newsfavourite">Save</button></div></li>`);
                 }
             } else {
                 showNewsNotingTips();
@@ -104,11 +123,21 @@ function getDefault() { // Get Default Language
 // Change Menu Tabs Function
 function chnangeMenu() { // Default First Tabs High Lighting Show
     $('.tablinks:eq(0)').addClass('active');
+    $('.tabcontent:eq(1)').hide();
     $('.tablinks').click(function (e) {
         let paramId = $(this).attr("id");
         $('#' + paramId + 'List').show();
         $('#' + paramId + 'List').siblings().not('.tab').hide();
         paramId === 'news' ? $('#tools').show() : $('#tools').hide();
+        if (paramId === 'favourite') {
+            $('#favouritetools').show();
+            // Update Favourite News List
+            updateFavouriteNewsList();
+        } else {
+            $('.tabcontent:eq(1)').hide();
+            $('#favouritetools').hide();
+        }
+        paramId === 'favourite' ? $('.tabcontent:eq(1)').show() : $('.tabcontent:eq(1)').hide();
         $('.tablinks').removeClass('active');
         $(this).addClass('active');
         $(".settingflow").hide();
@@ -158,7 +187,7 @@ function settingsEffect() { // Change Total Limits
         } else {
             localStorage.setItem('darkMode', 'close');
             $('html').removeClass('dark-mode');
-        }        
+        }
     });
     // Select Check Radio
     $("input[name='order_settings']").on("change", function () {
@@ -179,17 +208,23 @@ function settingsEffect() { // Change Total Limits
         $("#sliderValue").css('font-size', value + 'px');
         localStorage.setItem('styleFontSize', value);
         $('#newsList ul li').css('font-size', value + 'px');
+        $('#favouriteList ul li').css('font-size', value + 'px');
     });
     $('#newsList ul li').css('font-size', getLocalStorageStyleFontSize + 'px');
+    $('#favouriteList ul li').css('font-size', getLocalStorageStyleFontSize + 'px');
     // Font Color Effect
     $(".coloroption").click(function () {
         let backgroundColor = $(this).css("background-color");
         localStorage.setItem('styleFontColor', backgroundColor);
         $('#newsList ul li').css('color', backgroundColor);
         $('#newsList ul li a').css('color', backgroundColor);
+        $('#favouriteList ul li').css('color', backgroundColor);
+        $('#favouriteList ul li a').css('color', backgroundColor);
     });
     $('#newsList ul li').css('color', getLocalStorageStyleFontColor);
     $('#newsList ul li a').css('color', getLocalStorageStyleFontColor);
+    $('#favouriteList ul li').css('color', getLocalStorageStyleFontColor);
+    $('#favouriteList ul li a').css('color', getLocalStorageStyleFontColor);
 }
 
 // Get News List
@@ -256,9 +291,11 @@ function init() {
                             let htmlFull = $.parseHTML(response[0]);
                             let $articles = $(htmlFull).find(`${checkedUrls[i].rules
                                 }`);
-                            $articles.each(function () {
-                                // Some Webistes a tag not start with https or http
-                                let paramName = `${$(this).attr('href')}`.indexOf('/') === 0 ? `${$(this).attr('href')}` : `/${$(this).attr('href')}`;
+                            $articles.each(function () { // Some Webistes a tag not start with https or http
+                                let paramName = `${$(this).attr('href')
+                                    }`.indexOf('/') === 0 ? `${$(this).attr('href')
+                                    }` : `/${$(this).attr('href')
+                                    }`;
                                 newsInfoBox.push({
                                     title: `【${checkedUrls[i].name
                                         }】` + $(this).text().trim(),
@@ -355,7 +392,10 @@ function init() {
                             let $articles = $(htmlFull).find(`${checkedUrls[i].rules
                                 }`);
                             $articles.each(function (index, val) {
-                                let paramName = `${$(this).attr('href')}`.indexOf('/') === 0 ? `${$(this).attr('href')}` : `/${$(this).attr('href')}`;
+                                let paramName = `${$(this).attr('href')
+                                    }`.indexOf('/') === 0 ? `${$(this).attr('href')
+                                    }` : `/${$(this).attr('href')
+                                    }`;
                                 newsInfoBox.push({
                                     title: `【${checkedUrls[i].name
                                         }】` + $(this).text().trim(),
@@ -418,14 +458,20 @@ function init() {
                 const regex = new RegExp(`${getLocalStorageBlackList}`, 'g');
                 realLengthNewsInfoBox = realLengthNewsInfoBox.filter(item => !item.title.match(regex));
             }
+            // Filter Default News Items List and Favourite items List
+            if (JSON.parse(getLocalStorageFavourite).length > 0) {
+                realLengthNewsInfoBox = realLengthNewsInfoBox.filter(function (value, index) {
+                    return JSON.parse(getLocalStorageFavourite).map(x => x.title).indexOf(value.title) === -1;
+                });
+            }
             // Export Table use
             newsAll = realLengthNewsInfoBox;
             $('#totalNews').text(realLengthNewsInfoBox.length); // Set Total News
             for (let i = 0; i < realLengthNewsInfoBox.length; i++) {
-                $('#newsList ul').append(`<li><span>${i + 1 + '.'
+                $('#newsList ul').append(`<li><div><span>${i + 1 + '.'
                     }</span><a style="color:${getLocalStorageStyleFontColor}" href="${realLengthNewsInfoBox[i].links
                     }"  target="_blank">${realLengthNewsInfoBox[i].title
-                    }</a></li>`);
+                    }</a></div><div><button class="newsfavourite">Save</button></div></li>`);
             }
         }
         $('#newsList ul li').css('font-size', getLocalStorageStyleFontSize + 'px');
@@ -453,7 +499,7 @@ function init() {
     });
 }
 
-// Public Show Tips
+// News Tab Public Show Tips
 function showNewsNotingTips() {
     $('.tabcontent:first').css({ 'display': 'flex', 'align-items': 'center', 'justify-content': 'center' })
     if (getLocalStorageLanguage === 'zh-CN') {
@@ -462,6 +508,18 @@ function showNewsNotingTips() {
         $('#newsList ul').append(`<li style="text-align:center">什麼都沒有，請前往設置——訂閱源配置好訂閱源，再點擊開始按鈕開始。</li>`);
     } else if (getLocalStorageLanguage === 'en') {
         $('#newsList ul').append(`<li style="text-align:center">Nothing For You, Please Go to Settings--Rules Select News Source Then Click Start Button to Get Infomation.</li>`);
+    }
+}
+
+// Favourite Tab Public Show Tips
+function showFavouriteNotingTips() {
+    $('.tabcontent:eq(1)').css({ 'display': 'flex', 'align-items': 'center', 'justify-content': 'center' })
+    if (getLocalStorageLanguage === 'zh-CN') {
+        $('#favouriteList ul').append(`<li style="text-align:center">什么都没有，请收藏你的第一篇新闻。</li>`);
+    } else if (getLocalStorageLanguage === 'zh-TW') {
+        $('#favouriteList ul').append(`<li style="text-align:center">什麼都沒有，請收藏你的第一篇新聞。</li>`);
+    } else if (getLocalStorageLanguage === 'en') {
+        $('#favouriteList ul').append(`<li style="text-align:center">Nothing For You, Please Bookmark Your First News.</li>`);
     }
 }
 
@@ -486,7 +544,8 @@ $(".switch input").on("change", function () {
         }
         $('#newsList ul li').css('font-size', getLocalStorageStyleFontSize + 'px');
         $('#newsList ul li').css('color', getLocalStorageStyleFontColor);
-    } urlsArr = [];
+    }
+    urlsArr = [];
     newsArr = [];
     newsInfoBox = [];
     newsAll = [];
@@ -508,6 +567,22 @@ $("#searchBtn").on('click', function () {
     }
 });
 
+// Search Favourite List
+$("#searchFavouriteBtn").on('click', function () {
+    let keywords = $('#nameFavouriteItem').val();
+    const endwords = keywords.toUpperCase();
+    const parentUl = document.getElementById("favouriteList");
+    const childLi = parentUl.getElementsByTagName('li');
+    for (let i = 0; i < childLi.length; i++) {
+        let txtValue = childLi[i].textContent || childLi[i].innerText;
+        if (txtValue.toUpperCase().indexOf(endwords) > -1) {
+            childLi[i].style.display = "";
+        } else {
+            childLi[i].style.display = "none";
+        }
+    }
+});
+
 // Click Keyboard Enter to Search
 const searchButton = document.getElementById("searchBtn");
 document.addEventListener("keydown", function (event) {
@@ -516,8 +591,16 @@ document.addEventListener("keydown", function (event) {
     }
 });
 
+// Click Keyboard Enter to Search
+const searchFavouriteButton = document.getElementById("searchFavouriteBtn");
+document.addEventListener("keydown", function (event) {
+    if (event.key === 'Enter') {
+        searchFavouriteButton.click();
+    }
+});
+
 // Export News List
-let exportExcel = document.getElementById("exportExcel");
+const exportExcel = document.getElementById("exportExcel");
 exportExcel.addEventListener("click", function () {
     try {
         const headers = Object.keys(newsAll[0]);
@@ -544,9 +627,38 @@ exportExcel.addEventListener("click", function () {
         }
     }
 });
+// Export Favourite News List
+const exportFavouriteExcel = document.getElementById("exportFavouriteExcel");
+exportFavouriteExcel.addEventListener("click", function () {
+    try {
+        const headers = Object.keys(newsFavouriteArr[0]);
+        let csv = headers.join(",") + "\n";
+        newsFavouriteArr.forEach(row => {
+            let values = headers.map(header => row[header]);
+            csv += values.join(",") + "\n";
+        });
+        const blob = new Blob([csv], { type: "text/csv" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "news.csv";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } catch (e) { // Get Language Storage Again
+        let exportLocalStorageLanguage = localStorage.getItem('language');
+        if (exportLocalStorageLanguage === 'zh-CN') {
+            layer.msg('导出什么都没有')
+        } else if (exportLocalStorageLanguage === 'zh-TW') {
+            layer.msg('導出什麼都沒有')
+        } else if (exportLocalStorageLanguage === 'en') {
+            layer.msg('There is nothing for you')
+        }
+    }
+});
 
 // Update All LocalStorage Infomation
 function updateAllLocalStorage() {
+    getLocalStorageFavourite = localStorage.getItem('favouriteNews');
     getLocalStorageLanguage = localStorage.getItem('language');
     getLocalStorageTotalLimits = localStorage.getItem('totalLimits');
     getLocalStorageOrderSettings = localStorage.getItem('orderSettings');
@@ -555,6 +667,33 @@ function updateAllLocalStorage() {
     getLocalStoragememoryMode = localStorage.getItem('memoryMode');
     getLocalStorageStyleFontSize = localStorage.getItem('styleFontSize');
     getLocalStorageStyleFontColor = localStorage.getItem('styleFontColor');
+}
+
+// Update Favourite News List
+function updateFavouriteNewsList() {
+    $('#favouriteList ul').empty();
+    let favouriteArr;
+    try {
+        favouriteArr = JSON.parse(getLocalStorageFavourite);
+    } catch (e) {
+        favouriteArr = getLocalStorageFavourite;
+    }
+    if (favouriteArr.length > 0) {
+        $('.tabcontent:eq(1)').css("display", "block");
+        $('#totalFavouriteNews').text(favouriteArr.length)
+        newsFavouriteArr = favouriteArr;
+        for (let i = 0; i < favouriteArr.length; i++) {
+            $('#favouriteList ul').append(`<li><div><span>${i + 1 + '.'
+                }</span><a style="color:${getLocalStorageStyleFontColor}" href="${favouriteArr[i].links
+                }"  target="_blank">${favouriteArr[i].title
+                }</a></div><div><button class="removenewsfavourite">Delete</button></div></li>`);
+        }
+    } else {
+        newsFavouriteArr = [];
+        showFavouriteNotingTips();
+    }
+    $('#favouriteList ul li').css('font-size', getLocalStorageStyleFontSize + 'px');
+    $('#favouriteList ul li').css('color', getLocalStorageStyleFontColor);
 }
 
 // Set API Rules Check
@@ -707,7 +846,7 @@ $(document).on('click', '.testbtnapi', function () {
         request.done(function () {
             if (link === 'https://api.zhihu.com/topstory/hot-lists/total') {
                 $('#zhihuStatus').text('success');
-            } else if (link === 'https://i.news.qq.com/trpc.qqnews_web.kv_srv.kv_srv_http_proxy/list?sub_srv_id=finance&srv_id=pc&offset=0&limit=100&strategy=1&ext=  {%22pool%22:[%22hot%22],%22is_filter%22:2,%22check_type%22:true}') {
+            } else if (link === 'https://i.news.qq.com/trpc.qqnews_web.kv_srv.kv_srv_http_proxy/list?sub_srv_id=finance&srv_id=pc&offset=0&limit=100&strategy=1&ext=   {%22pool%22:[%22hot%22],%22is_filter%22:2,%22check_type%22:true}') {
                 $('#tencentStatus').text('success');
             } else if (link === 'https://www.toutiao.com/api/pc/feed/?category=news_hot') {
                 $('#toutiaoStatus').text('success');
@@ -960,3 +1099,47 @@ closeButton.addEventListener('click', () => {
     localStorage.clear();
     window.close();
 });
+// Save News Items to Favourite List
+$(document).on('click', '.newsfavourite', function () {
+    // Update Favourite News List
+    updateAllLocalStorage();
+    let toFavouriteNewsList;
+    try {
+        toFavouriteNewsList = JSON.parse(getLocalStorageFavourite)
+    } catch (e) {
+        toFavouriteNewsList = getLocalStorageFavourite;
+    }
+    toFavouriteNewsList.push({ title: $(this).parent().parent().find('a').text(), links: $(this).parent().parent().find('a').attr('href') });
+    // Filter Double News Item
+    toFavouriteNewsList = toFavouriteNewsList.filter(function (value, index) {
+        return toFavouriteNewsList.map(x => x.title).indexOf(value.title) === index
+    });
+    localStorage.setItem('favouriteNews', JSON.stringify(toFavouriteNewsList));
+    $(this).parent().parent().remove();
+    let totalNumber = Number($('#totalNews').text()) - 1
+    $('#totalNews').text(totalNumber);
+    // Update Favourite News List
+    updateAllLocalStorage();
+    updateFavouriteNewsList();
+    newsAll = JSON.parse(localStorage.getItem('memoryNewsList')).filter((x,y)=>JSON.parse(localStorage.getItem('favouriteNews')).map(item=>item.title).indexOf(x.title) === -1);
+    $('.tabcontent:eq(1)').hide();
+});
+// Delete News Item from Favourite List
+$(document).on('click', '.removenewsfavourite', function () {
+    // Update Favourite News List
+    updateAllLocalStorage();
+    let removeFavouriteNewsList;
+    try {
+        removeFavouriteNewsList = JSON.parse(getLocalStorageFavourite)
+    } catch (e) {
+        removeFavouriteNewsList = getLocalStorageFavourite;
+    }
+    removeFavouriteNewsList = removeFavouriteNewsList.filter(item => item.title !== $(this).parent().parent().find('a').text());
+    localStorage.setItem('favouriteNews', JSON.stringify(removeFavouriteNewsList));
+    let totalNumber = Number($('#totalFavouriteNews').text()) - 1;
+    $('#totalFavouriteNews').text(totalNumber)
+    $(this).parent().parent().remove();
+    updateAllLocalStorage();
+    updateFavouriteNewsList();
+});
+
