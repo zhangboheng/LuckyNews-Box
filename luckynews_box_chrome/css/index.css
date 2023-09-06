@@ -1,0 +1,441 @@
+html {
+    background-color:#fff;
+}
+
+.dark-mode {
+    filter: invert(1) hue-rotate(180deg);
+    font-weight: bold;
+}
+
+body {
+    width: 600px;
+    height: 400px;
+    overflow: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.tab ul {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    text-align: center;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab ul li {
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    width: 100%;
+}
+
+/* Change background color of buttons on hover */
+.tab li:hover {
+    color: #fff;
+    background-color: rgb(127, 187, 248);
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    border-top: none;
+    height: calc(100% - 60px);
+    overflow-y: auto;
+}
+
+#newsList ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+#settingsList {
+    padding: 20px 0;
+}
+
+/* Tools Zone Start */
+.switch {
+    display: inline-block;
+    position: relative;
+    width: 15px;
+    height: 15px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.switch .slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.switch .slider:hover {
+    background-color: rgb(127, 187, 248);
+}
+
+.switch .slider.round {
+    border-radius: 50%;
+}
+
+.switch input:checked~.slider {
+    background-color: rgb(30, 144, 255);
+}
+
+#searchBtn,
+#exportExcel,
+#resetBtn {
+    color: #fff;
+    background-color: rgb(30, 144, 255);
+    cursor: pointer;
+    border: 2px solid rgb(30, 144, 255);
+}
+
+#searchBtn:hover,
+#exportExcel:hover,
+#resetBtn:hover {
+    background-color: rgb(127, 187, 248);
+    border: 2px solid rgb(127, 187, 248); 
+}
+
+.inlinecenter {
+    display: flex;
+    align-items: center;
+}
+
+#tools {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Tools Zone End */
+/* Memory Button Start */
+.switchable {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 24px;
+}
+
+.switchable input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.sliderable {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.sliderable:before {
+    position: absolute;
+    content: "";
+    height: 17px;
+    width: 17px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.sliderable {
+    background-color: #2196F3;
+}
+
+input:focus+.sliderable {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.sliderable:before {
+    -webkit-transform: translateX(17px);
+    -ms-transform: translateX(17px);
+    transform: translateX(17px);
+}
+
+.sliderable.round {
+    border-radius: 17px;
+}
+
+.sliderable.round:before {
+    border-radius: 50%;
+}
+/* Memory Button End */
+/* Settings Zone Start */
+.columntab {
+    float: left;
+}
+
+.columntab ul li {
+    display: block;
+    padding: 10px 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.columntab ul li:hover {
+    color: #fff;
+    background-color: rgb(127, 187, 248);
+}
+
+.settingflow {
+    float: right;
+    width: 82%;
+    display: none;
+    padding-left: 10px;
+    border-left: 2px dashed rgb(30, 144, 255);
+}
+
+.settingflow ul {
+    margin-bottom: 10px;
+}
+
+.settingscontent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#contractUs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#contractUs li {
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    background-color: #fff;
+    margin-right: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#contractUs li img {
+    height: 30px;
+}
+
+#donateList {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#donateList div {
+    text-align: center;
+}
+
+#donateList li img {
+    height: 100px;
+}
+
+#donateList div:nth-child(1) li img {
+    height: 90px;
+}
+
+/* Rules Zone Accordion Style */
+.accordion {
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    padding: 14px 16px;
+    width: 100%;
+    text-align: left;
+    outline: none;
+    transition: 0.4s;
+}
+
+.target,
+.accordion:hover {
+    border: 1px solid rgb(30, 144, 255);
+    background-color: #fff;
+}
+
+.accordion:after {
+    content: '\002B';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.target:after {
+    content: "\2212";
+}
+
+/* Rules Table Style Start */
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    text-align: left;
+    padding: 8px;
+    text-align: center;
+}
+
+tr input {
+    width: 50px;
+}
+
+.panel {
+    padding: 10px;
+    background-color: white;
+    max-height: 0;
+    display: none;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+input[type='button'].sourcedel,
+input[type='button'].sourcedelrss {
+    color: #fff;
+    background: crimson;
+    border: 2px solid crimson;
+    cursor: pointer;
+}
+
+input[type='button'].sourceadd,
+input[type='button'].sourceaddrss {
+    color: #fff;
+    background: rgb(30, 144, 255);
+    border: 2px solid rgb(30, 144, 255);
+    cursor: pointer;
+}
+
+
+input[type='button'].sourceadd:hover,
+input[type='button'].sourceaddrss:hover {
+    color: #fff;
+    background-color: rgb(127, 187, 248);
+    border: 2px solid rgb(127, 187, 248);
+}
+
+input[type='button'].testbtn,
+input[type='button'].testbtnrss,
+input[type='button'].testbtnapi {
+    color: #fff;
+    background: rgb(30, 144, 255);
+    border: 2px solid rgb(30, 144, 255);
+    cursor: pointer;
+}
+
+input[type='button'].testbtn:hover,
+input[type='button'].testbtnrss:hover,
+input[type='button'].testbtnapi:hover {
+    color: #fff;
+    background-color: rgb(127, 187, 248);
+    border: 2px solid rgb(127, 187, 248);
+}
+
+/* Rules Table Syle End */
+
+#slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#sliderValue {
+    text-align: center;
+    font-size: 16px;
+}
+
+.coloroption {
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.tooltip {
+    position: relative;
+    cursor: pointer;
+    font-size:12px;
+    top: -6px;
+    left: 3px;
+    color: #fff;
+    background-color: rgb(30, 144, 255);
+    border-radius: 10px;
+}
+
+.tooltip-text {
+    display: none;
+    position: relative;
+    left: 10px;
+    color:#666;
+    font-weight: 500;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    z-index: 2;
+}
+
+.tooltip:hover .tooltip-text {
+    display: block;
+}
+
+.advancedinline {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+#blacklistFilter {
+    position: absolute;
+    right: 5px;
+}
+
+/* Settings Zone End */
+
+/* Define Blue HighLight */
+.active {
+    color: #fff;
+    background: rgb(30, 144, 255);
+}
