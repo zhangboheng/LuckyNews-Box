@@ -922,7 +922,7 @@ function getSettingRulesList() {
                 <td><input type="text" value="${getRss[i].name}" id="${getRss[i].name.replace(/\s+/g, '')}" placeholder="${getRss[i].name}" title="${getRss[i].name}" class="sourcename"></td>
                 <td><input type="text" value="${getRss[i].url}" placeholder="${getRss[i].url}" title="${getRss[i].url}" class="sourcelink" name="${getRss[i].name + 'url'}"></td>
                 <td><input type="text" value="${getRss[i].rules}" placeholder="${getRss[i].rules}" title="${getRss[i].rules}" class="ruleselement" name="${getRss[i].name + 'rules'}" disabled></td>
-                <td><span class="sourcestatus" id="${getRss[i].name + 'Status'}">${getDom[i].status}</span></td>
+                <td><span class="sourcestatus" id="${getRss[i].name + 'Status'}">${getRss[i].status}</span></td>
                 <td><span class="sourcestype">RSS</span></td>
                 <td><input type="button" class="sourcedelrss" value="-" title="Delete"></td>
             </tr>    
