@@ -1,6 +1,6 @@
 {
     "name": "LuckyNews Box",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "description": "Configure News Sources by Yourself.",
     "manifest_version": 3,
     "action": {

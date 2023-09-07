@@ -104,7 +104,7 @@ function getDefault() { // Get Default Language
                     $('#newsList ul').append(`<li><div><span>${i + 1 + '.'
                         }</span><a style="color:${getLocalStorageStyleFontColor}" href="${parseNewsList[i].links
                         }"  target="_blank">${parseNewsList[i].title
-                        }</a></div><div><button class="newsfavourite">Save</button></div></li>`);
+                        }</a></div><div><button class="newsfavourite">+</button></div></li>`);
                 }
             } else {
                 showNewsNotingTips();
@@ -471,7 +471,7 @@ function init() {
                 $('#newsList ul').append(`<li><div><span>${i + 1 + '.'
                     }</span><a style="color:${getLocalStorageStyleFontColor}" href="${realLengthNewsInfoBox[i].links
                     }"  target="_blank">${realLengthNewsInfoBox[i].title
-                    }</a></div><div><button class="newsfavourite">Save</button></div></li>`);
+                    }</a></div><div><button class="newsfavourite">+</button></div></li>`);
             }
         }
         $('#newsList ul li').css('font-size', getLocalStorageStyleFontSize + 'px');
@@ -686,7 +686,7 @@ function updateFavouriteNewsList() {
             $('#favouriteList ul').append(`<li><div><span>${i + 1 + '.'
                 }</span><a style="color:${getLocalStorageStyleFontColor}" href="${favouriteArr[i].links
                 }"  target="_blank">${favouriteArr[i].title
-                }</a></div><div><button class="removenewsfavourite">Delete</button></div></li>`);
+                }</a></div><div><button class="removenewsfavourite">-</button></div></li>`);
         }
     } else {
         newsFavouriteArr = [];
@@ -1121,8 +1121,8 @@ $(document).on('click', '.newsfavourite', function () {
     // Update Favourite News List
     updateAllLocalStorage();
     updateFavouriteNewsList();
-    newsAll = JSON.parse(localStorage.getItem('memoryNewsList')).filter((x,y)=>JSON.parse(localStorage.getItem('favouriteNews')).map(item=>item.title).indexOf(x.title) === -1);
     $('.tabcontent:eq(1)').hide();
+    newsAll = JSON.parse(localStorage.getItem('memoryNewsList')).filter((x,y)=>JSON.parse(localStorage.getItem('favouriteNews')).map(item=>item.title).indexOf(x.title) === -1);
 });
 // Delete News Item from Favourite List
 $(document).on('click', '.removenewsfavourite', function () {

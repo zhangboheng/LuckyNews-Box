@@ -32,15 +32,22 @@ $(document).ready(function () {
 // TW Chinese Translator
 function twChineseTranslator() {
     $('#news').text('新聞');
+    $('#favourite').text('收藏');
     $('#settings').text('設定');
     $('#instructions').text('玩法說明');
     $('#startText').text('啟動：');
     $('#totalText').text('總量：');
+    $('#totalFavouriteText').text('總量：');
     $('#searchText').text('搜尋關鍵字：');
+    $('#searchFavouriteText').text('搜尋關鍵字：');
     $('#searchBtn').val('ø搜尋');
+    $('#searchFavouriteBtn').val('ø搜尋');
     $("#searchBtn").attr("title", "搜尋");
+    $('#searchFavouriteBtn').attr("title", "搜尋");
     $('#exportExcel').val('∫匯出');
+    $('#exportFavouriteExcel').val('∫匯出');
     $('#exportExcel').attr("title", "匯出");
+    $('#exportFavouriteExcel').attr("title", "匯出")
     $('#about').text('關於');
     $('#advanced').text('高級');
     $('#blacklistText').html(`黑名單篩選<span class="tooltip">&nbsp;?&nbsp;</span><span class="tooltip-text">使用“｜”切割, 比如 "色情|性愛|愚蠢"</span>`);
@@ -51,6 +58,14 @@ function twChineseTranslator() {
     $('#history').text('歷史');
     $('#historyList').html(`
     <ul>
+        <li class="settingscontent">
+            <h3>版本 1.4.0<h3>
+            <p>2023-09-07</p>
+        </li>
+        <ul>
+            <li>新增收藏夾功能，幫助你收藏喜愛的新聞。</li>
+            <li>修復添加多個 RSS 源出現崩潰問題。</li>
+        </ul>
         <li class="settingscontent">
             <h3>版本 1.3.0<h3>
             <p>2023-09-04</p>
@@ -116,6 +131,11 @@ function twChineseTranslator() {
     } else if ($('#newsList ul li').text().indexOf('什么都没有，请前往设置——订阅源配置好订阅源，再点击开始按钮开始。') > -1) {
         $('#newsList ul li').text('什麼都沒有，請前往設置——訂閱源配置好訂閱源，再點擊開始按鈕開始。');
     }
+    if ($('#favouriteList ul li').text().indexOf('Nothing For You, Please Bookmark Your First News.') > -1) {
+        $('#favouriteList ul li').text('什麼都沒有，請收藏你的第一篇新聞。');
+    } else if ($('#favouriteList ul li').text().indexOf('什么都没有，请收藏你的第一篇新闻。') > -1) {
+        $('#favouriteList ul li').text('什麼都沒有，請收藏你的第一篇新聞。');
+    }
     $('#instructionsList').html(`
         <ul>
             <li>
@@ -147,15 +167,22 @@ function twChineseTranslator() {
 // CN Chinese Translator
 function cnChineseTranslate() {
     $('#news').text('新闻');
+    $('#favourite').text('收藏');
     $('#settings').text('设置');
     $('#instructions').text('玩法说明');
     $('#startText').text('开始：');
     $('#totalText').text('总数：');
+    $('#totalFavouriteText').text('总数：');
     $('#searchText').text('搜索关键词：');
+    $('#searchFavouriteText').text('搜索关键词：');
     $('#searchBtn').val('ø搜索');
+    $('#searchFavouriteBtn').val('ø搜索');
     $("#searchBtn").attr("title", "搜索");
+    $('#searchFavouriteBtn').attr("title", "搜索");
     $('#exportExcel').val('∫导出');
+    $('#exportFavouriteExcel').val('∫导出');
     $('#exportExcel').attr("title", "导出");
+    $('#exportFavouriteExcel').attr("title", "导出");
     $('#about').text('关于');
     $('#advanced').text('高级');
     $('#blacklistText').html(`黑名单筛选<span class="tooltip">&nbsp;?&nbsp;</span><span class="tooltip-text">使用“｜”切割, 比如 "色情|性爱|愚蠢"</span>`);
@@ -167,12 +194,20 @@ function cnChineseTranslate() {
     $('#historyList').html(`
     <ul>
         <li class="settingscontent">
+            <h3>版本 1.4.0<h3>
+            <p>2023-09-07</p>
+        </li>
+        <ul>
+            <li>新增收藏夹功能，帮助你收藏喜爱的新闻。</li>
+            <li>修复添加多个 RSS 源出现崩溃问题。</li>
+        </ul>
+        <li class="settingscontent">
             <h3>版本 1.3.0<h3>
             <p>2023-09-04</p>
         </li>
         <ul>
             <li>样式新增暗黑模式。</li>
-            <li>修复 Bugs</li>
+            <li>修复 Bugs。</li>
         </ul>
         <li class="settingscontent">
             <h3>版本 1.1.0<h3>
@@ -235,6 +270,11 @@ function cnChineseTranslate() {
     } else if ($('#newsList ul li').text().indexOf('什麼都沒有，請前往設置——訂閱源配置好訂閱源，再點擊開始按鈕開始。') > -1) {
         $('#newsList ul li').text('什么都没有，请前往设置——订阅源配置好订阅源，再点击开始按钮开始。');
     }
+    if ($('#favouriteList ul li').text().indexOf('Nothing For You, Please Bookmark Your First News.') > -1) {
+        $('#favouriteList ul li').text('什么都没有，请收藏你的第一篇新闻。');
+    } else if ($('#favouriteList ul li').text().indexOf('什麼都沒有，請收藏你的第一篇新聞。') > -1) {
+        $('#favouriteList ul li').text('什么都没有，请收藏你的第一篇新闻。');
+    }
     $('#instructionsList').html(`
         <ul>
             <li>
@@ -266,15 +306,22 @@ function cnChineseTranslate() {
 // English Translator
 function englishTranslate() {
     $('#news').text('News');
+    $('#favourite').text('Favourite');
     $('#settings').text('Settings');
     $('#instructions').text('Instructions');
     $('#startText').text('Start：');
     $('#totalText').text('Total：');
+    $('#totalFavouriteText').text('Total：');
     $('#searchText').text('Search Keywords：');
+    $('#searchFavouriteText').text('Search Keywords：');
     $('#searchBtn').val('øSearch');
+    $('#searchFavouriteBtn').val('øSearch');
     $("#searchBtn").attr("title", "Search");
+    $('#searchFavouriteBtn').attr("title", "Search");
     $('#exportExcel').val('∫Export');
+    $('#exportFavouriteExcel').val('∫Export');
     $('#exportExcel').attr("title", "Export");
+    $('#exportFavouriteExcel').attr("title", "Export");
     $('#about').text('About');
     $('#advanced').text('Advanced');
     $('#blacklistText').html(`Blacklist Filter<span class="tooltip">&nbsp;?&nbsp;</span><span class="tooltip-text">Separated by "|", such as "porn|sex|stupid"</span>`);
@@ -285,6 +332,14 @@ function englishTranslate() {
     $('#history').text('History');
     $('#historyList').html(`
         <ul>
+            <li class="settingscontent">
+                <h3>Version 1.4.0<h3>
+                <p>2023-09-07</p>
+            </li>
+            <ul>
+                <li>Add favourites function to help you collect your favorite news.</li>
+                <li>Fixed a crash issue when adding multiple RSS feeds.</li>
+            </ul>
             <li class="settingscontent">
                 <h3>Version 1.3.0<h3>
                 <p>2023-09-04</p>
@@ -349,6 +404,11 @@ function englishTranslate() {
         $('#newsList ul li').text('Nothing For You, Please Go to Settings--Rules Select News Source Then Click Start Button to Get Infomation.');
     } else if ($('#newsList ul li').text().indexOf('什麼都沒有，請前往設置——訂閱源配置好訂閱源，再點擊開始按鈕開始。') > -1) {
         $('#newsList ul li').text('Nothing For You, Please Go to Settings--Rules Select News Source Then Click Start Button to Get Infomation.');
+    }
+    if ($('#favouriteList ul li').text().indexOf('什么都没有，请收藏你的第一篇新闻。') > -1) {
+        $('#favouriteList ul li').text('Nothing For You, Please Bookmark Your First News.');
+    } else if ($('#favouriteList ul li').text().indexOf('什麼都沒有，請收藏你的第一篇新聞。') > -1) {
+        $('#favouriteList ul li').text('Nothing For You, Please Bookmark Your First News.');
     }
     $('#instructionsList').html(`
         <ul>
