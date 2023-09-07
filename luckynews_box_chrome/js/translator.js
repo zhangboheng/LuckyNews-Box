@@ -326,7 +326,7 @@ function englishTranslate() {
     $('#advanced').text('Advanced');
     $('#blacklistText').html(`Blacklist Filter<span class="tooltip">&nbsp;?&nbsp;</span><span class="tooltip-text">Separated by "|", such as "porn|sex|stupid"</span>`);
     $('#blacklistFilter').attr('placeholder', 'porn|sex|stupid');
-    $('#memoryModeText').text('Memory Model');
+    $('#memoryModeText').text('Memory Mode');
     $('#basic').text('Basic');
     $('#donate').text('Donate');
     $('#history').text('History');

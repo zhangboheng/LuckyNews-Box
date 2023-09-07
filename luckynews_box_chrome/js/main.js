@@ -1122,7 +1122,11 @@ $(document).on('click', '.newsfavourite', function () {
     updateAllLocalStorage();
     updateFavouriteNewsList();
     $('.tabcontent:eq(1)').hide();
-    newsAll = JSON.parse(localStorage.getItem('memoryNewsList')).filter((x,y)=>JSON.parse(localStorage.getItem('favouriteNews')).map(item=>item.title).indexOf(x.title) === -1);
+    try {
+        newsAll = JSON.parse(localStorage.getItem('memoryNewsList')).filter((x,y)=>JSON.parse(localStorage.getItem('favouriteNews')).map(item=>item.title).indexOf(x.title) === -1);
+    } catch(e) {
+        return false;
+    }
 });
 // Delete News Item from Favourite List
 $(document).on('click', '.removenewsfavourite', function () {
