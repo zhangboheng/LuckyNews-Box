@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Configure News Sources by Yourself">
+    <meta name="keywords" content="News, Feed, RSS, JSON">
+    <meta name="author" content="Zhang Quan">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LuckyNews Box Settings</title>
+    <link rel="stylesheet" href="./css/settings.css">
+    <script src="./js/jquery-3.7.0.min.js"></script>
+    <script src="./js/layui/lyaui.js"></script>
+    <script src="./js/public.js"></script>
+    <script src="./js/translator.js"></script>
+</head>
+
+<body>
+    <!-- Top Logo Start -->
+    <div id="topLogo">
+        <img src="./images/icon48.png" alt="LuckyNews Box Logo"><span>&nbsp;LuckyNews Box</span>
+    </div>
+    <!-- Top Logo End -->
+    <!-- Settings List Start -->
+    <div id="settingsList" class="tabcontent">
+        <div class="columntab">
+            <ul>
+                <li class="tabsettings" id="about">About</li>
+                <li class="tabsettings" id="advanced">Advanced</li>
+                <li class="tabsettings" id="basic">Basic</li>
+                <li class="tabsettings" id="donate">Donate</li>
+                <li class="tabsettings" id="history">History</li>
+                <li class="tabsettings" id="rules">Rules</li>
+                <li class="tabsettings" id="style">Styles</li>
+            </ul>
+        </div>
+        <!-- About Content Start -->
+        <div id="aboutList" class="settingflow">
+            <div class="settingscontent">
+                <h3 id="versionText">Version</h3>
+                <p>1.6.7</p>
+            </div>
+            <div class="settingscontent">
+                <h3 id="emailText">E-mail</h3>
+                <p>zhangboheng827@gmail.com</p>
+            </div>
+            <div class="settingscontent">
+                <h3 id="powerText">Power By</h3>
+                <p>Luckydesigner.space</p>
+            </div>
+            <div class="settingscontent">
+                <h3 id="socialText">Social</h3>
+                <ul id="contractUs">
+                    <li>
+                        <img id="wechatImg" src="images/wechat.svg" title="Wechat ID: Nosense-history">
+                    </li>
+                    <li>
+                        <a target="_blank" href="https://github.com/zhangboheng/"><img src="images/github.svg"
+                                title="Github"></a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="https://www.youtube.com/c/LuckyDesigner"><img src="images/youtube.svg"
+                                title="Youtube"></a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="https://t.me/Luckydesignerspace"><img src="images/telegram.svg"
+                                title="Telegram"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- About Content End -->
+        <!-- advancedList Content Start -->
+        <div id="advancedList" class="settingflow">
+            <div class="settingscontent">
+                <div class="advancedinline">
+                    <h3 id="blacklistText">Blacklist Filter</h3><span class="tooltip">&nbsp;?&nbsp;</span>
+                </div>
+                <textarea placeholder="porn|sex|stupid" value="" id="blacklistFilter"></textarea>
+            </div>
+            <div class="settingscontent">
+                <div class="advancedinline">
+                    <h3 id="favouriteText">Favourite Filter</h3><span class="tooltip-favourite">&nbsp;?&nbsp;</span>
+                </div>
+                <textarea placeholder="money|learn|smart" value="" id="favouriteFilter"></textarea>
+            </div>
+            <div class="settingscontent">
+                <h3 id="memoryModeText">Memory Mode</h3>
+                <label class="switchable">
+                    <input type="checkbox" id="memoryMode">
+                    <span class="sliderable round"></span>
+                </label>
+            </div>
+            <div class="settingscontent">
+                <div>
+                    <h3 id="importRulesText">Import Rules</h3>
+                </div>
+                <div>
+                    <button id="uploadButton" class="advancedbtn">Upload JSON</button>
+                    <input type="file" id="fileInput" accept=".json" style="display: none;">
+                </div>
+            </div>
+            <div class="settingscontent">
+                <div>
+                    <h3 id="exportRulesText">Export Rules</h3>
+                </div>
+                <div>
+                    <button id="downloadButton" class="advancedbtn">Download</button>
+                </div>
+            </div>
+            <div class="settingscontent">
+                <h3 id="resetText">Reset</h3>
+                <button id="resetBtn">
+                    <img src="./images/refresh.svg" tag="Reset Default" />
+                </button>
+            </div>
+        </div>
+        <!-- Advanced Content End -->
+        <!-- Basic Content Start -->
+        <div id="basicList" class="settingflow">
+            <div id="languagesettings" class="settingscontent">
+                <h3 id="languageText">Languages</h3>
+                <select style="width:100px; height:25px;" name="languages" id="languages">
+                    <option value="en">English</option>
+                    <option value="zh-CN">简体中文</option>
+                    <option value="zh-TW">正體中文</option>
+                </select>
+            </div>
+            <div id="totalsettings" class="settingscontent">
+                <h3 id="totalLimitsText">Total Limits</h3>
+                <input type="number" id="editTotal" value="300" min="10" style="width:92px; height:20px;"
+                    name="numberschange" />
+            </div>
+
+            <div id="ordersettings" class="settingscontent">
+                <h3 id="orderText">Order Settings</h3>
+                <div class="settingscontent">
+                    <input type="radio" id="default" name="order_settings" value="default" checked>
+                    <label for="default" id="defaultText">Default</label><br>
+                    <input type="radio" id="short" name="order_settings" value="short">
+                    <label for="short" id="shortText">S to L</label><br>
+                    <input type="radio" id="long" name="order_settings" value="long">
+                    <label for="long" id="longText">L to S</label><br>
+                    <input type="radio" id="random" name="order_settings" value="random">
+                    <label for="random" id="randomText">Random</label>
+                </div>
+            </div>
+        </div>
+        <!-- Basic Content End -->
+        <!-- Donate Content Start -->
+        <div id="donateList" class="settingflow">
+            <div>
+                <h3 id="paypalText">PayPal</h3>
+                <ul>
+                    <li>
+                        <img src="images/paypalqrcode.png" title="paypal">
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h3 id="alipayText">Alipay</h3>
+                <ul>
+                    <li>
+                        <img src="images/alipayqr.png" title="alipay">
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h3 id="wechatpayText">Wechat Pay</h3>
+                <ul>
+                    <li>
+                        <img src="images/wechatqr.png" title="wechatpay">
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Donate Content End -->
+        <!-- History Content Start -->
+        <div id="historyList" class="settingflow"></div>
+        <!-- History Content End -->
+        <!-- Rules Content Start -->
+        <div id="rulesList" class="settingflow">
+            <button class="accordion">API</button>
+            <div class="panel">
+                <table id="apiList">
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="selectall" name="tocheckall" checked />
+                        </td>
+                        <td colspan="3">
+                            <div class="settingscontent">
+                                <input id="nameApiSearch" type="text" class="txt">&nbsp;
+                                <button id="nameApiSearchBtn" title="Search" class="customsearchbtn">
+                                    <img src="./images/search.svg" alt="Search API Rules">
+                                </button>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="testbtnapi teststatus" title="Test State">
+                                <img src="./images/valid.svg" alt="Test API Links Valid">
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Active</th>
+                        <th>Name</th>
+                        <th>Link</th>
+                        <th>Elements</th>
+                        <th>State</th>
+                        <th>Type</th>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="checkbox" name="firstcheck"></td>
+                        <td><input type="text" value="ZhiHu Top Hot" class="sourcename" id="zhihu"></td>
+                        <td><input type="text" name="firstlink" value="https://api.zhihu.com/topstory/hot-lists/total"
+                                class="sourcelink" disabled></td>
+                        <td><input type="text" value="-" class="ruleselement" name="firstrules" disabled></td>
+                        <td>
+                            <span class="sourcestatus" id="zhihuStatus">-</span>
+                        </td>
+                        <td>
+                            <span class="sourcestype">API</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="checkbox" name="secondcheck"></td>
+                        <td><input type="text" value="Tencent News" class="sourcename" id="tencent"></td>
+                        <td><input type="text"
+                                value="https://i.news.qq.com/trpc.qqnews_web.kv_srv.kv_srv_http_proxy/list?sub_srv_id=finance&srv_id=pc&offset=0&limit=100&strategy=1&ext={%22pool%22:[%22hot%22],%22is_filter%22:2,%22check_type%22:true}"
+                                class="sourcelink" name="secondlink" disabled></td>
+                        <td><input type="text" value="-" class="ruleselement" name="secondrules" disabled></td>
+                        <td>
+                            <span class="sourcestatus" id="tencentStatus">-</span>
+                        </td>
+                        <td>
+                            <span class="sourcestype">API</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="checkbox" name="thirdcheck"></td>
+                        <td><input type="text" value="Toutiao Hot" class="sourcename" id="toutiao"></td>
+                        <td><input type="text" value="https://www.toutiao.com/api/pc/feed/?category=news_hot"
+                                class="sourcelink" name="thirdlink" disabled></td>
+                        <td><input type="text" value="-" class="ruleselement" name="fourthrules" disabled></td>
+                        <td>
+                            <span class="sourcestatus" id="toutiaoStatus">-</span>
+                        </td>
+                        <td>
+                            <span class="sourcestype">API</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="checkbox" name="fourthcheck"></td>
+                        <td><input type="text" value="Weibo Top" class="sourcename" id="weibo"></td>
+                        <td><input type="text"
+                                value="https://m.weibo.cn/api/container/getIndex?containerid=106003type%3D25%26t%3D3%26disable_hot%3D1%26filter_type%3Drealtimehot"
+                                class="sourcelink" name="fourthlink" disabled></td>
+                        <td><input type="text" value="-" class="ruleselement" name="thirdrules" disabled></td>
+                        <td>
+                            <span class="sourcestatus" id="weiboStatus">-</span>
+                        </td>
+                        <td>
+                            <span class="sourcestype">API</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" id="apiTips">If you have news api, you can mail me. I will add here.</td>
+                    </tr>
+                </table>
+            </div>
+            <button class="accordion">DOM</button>
+            <div class="panel">
+                <table id="domList">
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="selectdomall" name="tocheckall" checked>
+                        </td>
+                        <td colspan="3">
+                            <div class="settingscontent">
+                                <input id="nameDomSearch" type="text" class="txt">&nbsp;
+                                <button id="nameDomSearchBtn" title="Search" class="customsearchbtn">
+                                    <img src="./images/search.svg" alt="Search DOM Rules">
+                                </button>
+                            </div>
+                        </td>
+                        <td>
+                            <button type="button" class="testbtn teststatus" title="Test State">
+                                <img src="./images/valid.svg" alt="Test DOM Links Valid">
+                            </button>
+                        </td>
+                        <td></td>
+                        <td>
+                            <input type="button" class="sourceadd" value="+" title="Add">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Active</th>
+                        <th>Name</th>
+                        <th>Link</th>
+                        <th>Elements</th>
+                        <th>State</th>
+                        <th>Type</th>
+                        <th>Option</th>
+                    </tr>
+                </table>
+            </div>
+            <button class="accordion">RSS</button>
+            <div class="panel">
+                <table id="rssList">
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="selectrssall" name="tocheckall" checked>
+                        </td>
+                        <td colspan="3">
+                            <div class="settingscontent">
+                                <input id="nameRssSearch" type="text" class="txt">&nbsp;
+                                <button id="nameRssSearchBtn" title="Search" class="customsearchbtn">
+                                    <img src="./images/search.svg" alt="Search RSS Rules">
+                                </button>
+                            </div>
+                        </td>
+                        <td>
+                            <button type="button" class="testbtnrss teststatus" title="Test State">
+                                <img src="./images/valid.svg" alt="Test RSS Links Valid">
+                            </button>
+                        </td>
+                        <td></td>
+                        <td>
+                            <input type="button" class="sourceaddrss" value="+" title="Add">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Active</th>
+                        <th>Name</th>
+                        <th>RSS</th>
+                        <th>Elements</th>
+                        <th>State</th>
+                        <th>Type</th>
+                        <th>Option</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- Rules Content End -->
+        <!-- Style Content Start -->
+        <div id="styleList" class="settingflow">
+            <div class="settingscontent">
+                <h3 id="darkModeText">Dark Mode</h3>
+                <label class="switchable">
+                    <input type="checkbox" id="darkModeSwitch">
+                    <span class="sliderable round"></span>
+                </label>
+            </div>
+            <div class="settingscontent">
+                <h3 id="fontSizeText">Font Size</h3>
+                <div id="slider">
+                    <input type="range" min="12" max="20" value="12" />
+                    <span id="sliderValue">12</span>
+                </div>
+            </div>
+            <div class="settingscontent">
+                <h3 id="fontColorText">Font Color</h3>
+                <ul class="settingscontent" style="width: 50%;">
+                    <li>
+                        <div class="coloroption" data-color="#ff0000" style="background-color: #000;"></div>
+                    </li>
+                    <li>
+                        <div class="coloroption" data-color="#00ff00" style="background-color: #666;"></div>
+                    </li>
+                    <li>
+                        <div class="coloroption" data-color="#0000ff" style="background-color: #1e90ff;"></div>
+                    </li>
+                    <li>
+                        <div class="coloroption" data-color="#0000ff" style="background-color: #9F353A;"></div>
+                    </li>
+                    <li>
+                        <div class="coloroption" data-color="#0000ff" style="background-color: #5DAC81;"></div>
+                    </li>
+                    <li>
+                        <div class="coloroption" data-color="#0000ff" style="background-color: #33A6B8;"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Style Content End -->
+    </div>
+    <!-- Settings List End -->
+    <script src="./js/settings.js"></script>
+</body>
+
+</html>

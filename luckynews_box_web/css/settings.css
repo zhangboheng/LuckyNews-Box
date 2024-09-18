@@ -1,0 +1,396 @@
+html {
+    background-color: #fff;
+}
+
+.dark-mode {
+    filter: invert(1) hue-rotate(180deg);
+    font-weight: bold;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+/* Custom Search Input and Search Btn Style Start*/
+.keywordsSearchbox,
+.customsearchbtn {
+    height: 21px;
+}
+.customsearchbtn img {
+    width: 100%;
+    height: 100%;
+}
+.settingspecialheight {
+    height: auto;
+}
+/* Custom Search Input and Search Btn Style End*/
+#settingsList {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+#topLogo {
+    padding: 10px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.customsearchbtn,
+#resetBtn,
+#uploadButton,
+#downloadButton {
+    color: #fff;
+    background-color: rgb(30, 144, 255);
+    cursor: pointer;
+    border: 2px solid rgb(30, 144, 255);
+}
+
+.customsearchbtn:hover,
+#resetBtn:hover,
+#uploadButton:hover,
+#downloadButton:hover {
+    background-color: rgb(127, 187, 248);
+    border: 2px solid rgb(127, 187, 248);
+}
+
+#resetBtn {
+    height:21px;
+}
+
+#resetBtn img {
+    width: 100%;
+    height: 100%;
+}
+
+/* Memory Button Start */
+.switchable {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 24px;
+}
+
+.switchable input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.sliderable {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.sliderable:before {
+    position: absolute;
+    content: "";
+    height: 17px;
+    width: 17px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.sliderable {
+    background-color: #2196F3;
+}
+
+input:focus+.sliderable {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.sliderable:before {
+    -webkit-transform: translateX(17px);
+    -ms-transform: translateX(17px);
+    transform: translateX(17px);
+}
+
+.sliderable.round {
+    border-radius: 17px;
+}
+
+.sliderable.round:before {
+    border-radius: 50%;
+}
+
+.advancedbtn {
+    width: 120px;
+}
+
+/* Memory Button End */
+/* Settings Zone Start */
+.columntab {
+    float: left;
+}
+
+.columntab ul li {
+    display: block;
+    padding: 10px 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.columntab ul li:hover {
+    color: #fff;
+    background-color: rgb(127, 187, 248);
+}
+
+.settingflow {
+    float: right;
+    width: 100%;
+    display: none;
+    height: calc(100vh - 100px);
+    overflow: auto;
+    padding: 0 20px;
+    border-left: 2px dashed rgb(30, 144, 255);
+}
+
+.settingflow ul {
+    margin-bottom: 10px;
+}
+
+.settingscontent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#contractUs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#contractUs li {
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    background-color: #fff;
+    margin-right: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#contractUs li img {
+    height: 30px;
+}
+
+#donateList {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#donateList div {
+    text-align: center;
+}
+
+#donateList li img {
+    height: 100%;
+    max-height: 150px;
+    max-width: 150px;
+}
+
+/* Rules Zone Accordion Style */
+.accordion {
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    padding: 14px 16px;
+    width: 100%;
+    text-align: left;
+    outline: none;
+    transition: 0.4s;
+}
+
+.target,
+.accordion:hover {
+    border: 1px solid rgb(30, 144, 255);
+    background-color: #fff;
+}
+
+.accordion:after {
+    content: '\002B';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.target:after {
+    content: "\2212";
+}
+
+/* Rules Tools Style Start */
+.toptools {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Rules Tools Style End */
+/* Rules Table Style Start */
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    text-align: left;
+    padding: 8px;
+    text-align: center;
+}
+
+tr input[type='text'] {
+    width: 100%;
+}
+
+#blacklistFilter,
+#favouriteFilter {
+    width: 50%;
+    resize: vertical;
+}
+
+input[type='checkbox'] {
+    cursor: pointer;
+}
+
+.panel {
+    padding: 10px;
+    background-color: white;
+    max-height: 0;
+    display: none;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+input[type='button'].sourcedel,
+input[type='button'].sourcedelrss {
+    color: #fff;
+    background: crimson;
+    border: 2px solid crimson;
+    cursor: pointer;
+}
+
+input[type='button'].sourceadd,
+input[type='button'].sourceaddrss {
+    color: #fff;
+    background: rgb(30, 144, 255);
+    border: 2px solid rgb(30, 144, 255);
+    cursor: pointer;
+}
+
+
+.testbtn,
+.testbtnrss,
+.testbtnapi {
+    color: #fff;
+    background: rgb(30, 144, 255);
+    border: 2px solid rgb(30, 144, 255);
+    cursor: pointer;
+    height: 21px;
+}
+
+.testbtn img,
+.testbtnrss img,
+.testbtnapi img {
+    width: 100%;
+    height: 100%;
+}
+
+.testbtn:hover,
+.testbtnrss:hover,
+.testbtnapi:hover {
+    color: #fff;
+    background-color: rgb(127, 187, 248);
+    border: 2px solid rgb(127, 187, 248);
+}
+
+.gosettings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Rules Table Syle End */
+
+#slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#sliderValue {
+    text-align: center;
+    font-size: 16px;
+}
+
+.coloroption {
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.tooltip,
+.tooltip-favourite {
+    position: relative;
+    cursor: pointer;
+    font-size: 12px;
+    top: 10px;
+    left: 5px;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    color: #fff;
+    background-color: rgb(30, 144, 255);
+    border-radius: 10px;
+}
+
+.advancedinline {
+    display: flex;
+    justify-content: center;
+}
+/* Settings Zone End */
+
+/* Define Blue HighLight */
+.active {
+    color: #fff;
+    background: rgb(30, 144, 255);
+}

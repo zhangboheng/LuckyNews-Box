@@ -1,0 +1,45 @@
+<view>
+  <view class="container-head">
+    <image src="../../image/icon128.png" alt="Logo"></image>
+    <view class="container-item-text">
+      <view class="inner-box"><text class="inner-title">LuckyNews Box</text></view>
+      <view><text>Version 1.7.0</text></view>
+    </view>
+  </view>
+  <view class="container">
+    <view class="container-item item-top" bind:tap="goToInstructions">
+      <text>玩法说明</text>
+      <image src="../../image/rightrow.png"></image>
+    </view>
+  </view>
+  <view class="container">
+    <view class="container-item">
+      <text>订阅源库</text>
+      <image src="../../image/rightrow.png"></image>
+    </view>
+  </view>
+  <view class="container">
+    <view class="container-item">
+      <text>样式风格</text>
+      <image src="../../image/rightrow.png"></image>
+    </view>
+  </view>
+  <view class="container">
+    <view class="container-item" bind:tap="goToDonate">
+      <text>捐赠打赏</text>
+      <image src="../../image/rightrow.png"></image>
+    </view>
+  </view>
+  <view class="container">
+    <view class="container-item" bind:tap="goToUpdateHistory">
+      <text>更新历史</text>
+      <image src="../../image/rightrow.png"></image>
+    </view>
+  </view>
+  <view class="container">
+    <view class="container-item" bind:tap="goToAboutUs">
+      <text>关于我们</text>
+      <image src="../../image/rightrow.png"></image>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,11 @@
+<view class="container">
+  <view class="search-box">
+    <input class="search-input" placeholder="请输入搜索内容" bindinput="onSearchInput" />
+    <image class="search-button" src="../../image/search.png" bindtap="onSearch"></image>
+  </view>
+  <view class="row" wx:for="{{rectangles}}" wx:key="index">
+    <view class="rectangle" bind:tap="navigateToNextPage" data-index="{{item.index}}">
+      {{ item.title }}
+    </view>
+  </view>
+</view>

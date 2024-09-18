@@ -1,0 +1,20 @@
+.container {
+  padding: 20px;
+}
+
+.container-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.inner-input {
+  border: 1px solid #cccccc;
+  width:40%;
+}
+
+.choose-order {
+  border: 1px solid #cccccc;
+  width:40%;
+}

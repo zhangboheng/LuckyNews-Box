@@ -1,0 +1,40 @@
+<view class="container">
+  <view>
+    <text class="inner-title">第一步, 前往设置 -> 新闻源库添加新闻源</text>
+    <view class="inner-content">
+      <view>
+        <text>支持 <text style="font-weight:bold;">API</text>, <text style="font-weight:bold;">DOM</text> 和 <text style="font-weight:bold;">RSS</text> 模式。</text>
+      </view>
+      <view>
+        <text><text style="font-weight:bold;">API</text> 模式已经内置四个选项, 如果你有新的新闻 API, 可以发邮件通知我。</text>
+      </view>
+      <view>
+        <text><text style="font-weight:bold;">DOM</text> 模式需要你自行配置。</text>
+      </view>
+      <view>
+        <text>举一个例子, 如果你想从 https://lite.cnn.com/en，获取新闻信息, 你可以在 'name' 输入框输入自定义名称, 在 'link' 输入 https://lite.cnn.com/en, 在输入框 'rules' 输入 '.tabcontent ul li a'。</text>
+      </view>
+      <view>
+        <text><text style="font-weight:bold;">RSS</text> 模式也需要你自行配置。</text>
+      </view>
+      <view>
+        <text>举一个例子, 如果你想订阅 https://www.luckydesigner.space/feed, 你可以在 'name' 输入框输入自定义名称, 在 'link' 输入 https://www.luckydesigner.space/feed。</text>
+      </view>
+    </view>
+  </view>
+  <view>
+    <text class="inner-title">第二步, 前往新闻后点击开始按钮</text>
+    <view class="inner-content">
+      <view>
+        <text>享受有趣的新闻吧。</text>
+      </view>
+    </view>
+  </view>
+  <view>
+    <text class="inner-title">注意事项</text>
+    <view class="inner-content">
+      <text>重复的自定义名称可能会造成错误。</text>
+      <text>有些网站可能三种模式都不支持。</text>
+    </view>
+  </view>
+</view>

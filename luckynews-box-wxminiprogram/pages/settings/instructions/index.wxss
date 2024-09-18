@@ -1,0 +1,11 @@
+.container {
+  padding: 20px;
+}
+
+.inner-title {
+  font-weight: bold;
+}
+
+.inner-content {
+  margin: 20px 0;
+}

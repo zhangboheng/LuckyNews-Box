@@ -1,0 +1,33 @@
+<view class="container">
+  <view class="settingscontent">
+    <text class="email" id="emailText">电子邮箱：</text>
+    <text>zhangboheng827@gmail.com</text>
+  </view>
+  <view class="settingscontent">
+    <text class="power" id="powerText">技术支援：</text>
+    <text>https://luckydesigner.space/</text>
+  </view>
+  <view class="settingscontent">
+    <text class="social" id="socialText">社交媒体：</text>
+    <view class="table">
+      <!-- 表头 -->
+      <view class="row header">
+        <text class="cell">名称</text>
+        <text class="cell">账号</text>
+      </view>
+      <!-- 表内容 -->
+      <view class="row">
+        <text class="cell">微信ID</text>
+        <text class="cell">Nosense-history</text>
+      </view>
+      <view class="row">
+        <text class="cell">Github</text>
+        <text class="cell">zhangboheng</text>
+      </view>
+      <view class="row">
+        <text class="cell">Youtube</text>
+        <text class="cell">LuckyDesigner</text>
+      </view>
+    </view>
+  </view>
+</view>

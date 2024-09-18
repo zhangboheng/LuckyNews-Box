@@ -1,0 +1,14 @@
+<view class="container">
+  <view class="container-item">
+    <text>新闻条目限制总数</text>
+    <input class="inner-input" type="number" placeholder="限制接收数量" bindinput="handleInput" value="{{ inputValue }}"></input>
+  </view>
+  <view class="container-item">
+    <text>新闻条目排序</text>
+    <picker class="choose-order" bindchange="bindPickerChange" value="{{selectedOption}}" range="{{array}}">
+      <view class="picker">
+        {{array[selectedOption]}}
+      </view>
+    </picker>
+  </view>
+</view>
