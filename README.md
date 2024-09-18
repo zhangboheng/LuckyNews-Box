@@ -1,5 +1,6 @@
 # LuckyNews Box
 ![LuckyNews Box](./luckynews_box_firefox/images/icon128.png)
+
 LuckyNews Box is a browser extension helps you get news quickly, supports API, DOM and RSS, all configured by yourself.
 
 ![LuckyNews Box](./source/1.jpg)
