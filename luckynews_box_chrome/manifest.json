@@ -1,0 +1,26 @@
+{
+  "name": "LuckyNews Box",
+  "version": "1.7.1.1",
+  "description": "Users customize their news sources for API, DOM, and RSS feeds. Explore possibilities beyond news.",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "images/icon16.png"
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "content_scripts": [
+      {
+          "js": ["js/jquery-3.7.0.min.js"],
+          "matches": ["<all_urls>"]
+      }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  }
+}
